@@ -1,0 +1,10 @@
+.userViews {
+  background-color: rgb(70, 69, 69);
+  color: rgb(31, 31, 31);
+}
+.userViews table {
+  padding: 2rem;
+  width: 90%;
+  text-align: left;
+  background-color: rgb(230, 231, 229);
+}
