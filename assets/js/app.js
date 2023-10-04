@@ -1,7 +1,8 @@
 import { showAllUsers, showUser } from "./modules/view/userViews.js";
+import { createForm } from "./modules/view/login.js";
 
 // hoisting to window level.
-window._myEventListners = { userClicked, userViewDone };
+window._myEventListners = { userClicked, userViewDone, checkUser };
 
 let globalUserData;
 
@@ -11,8 +12,8 @@ let globalUserData;
 
 
 // fetch users  model code ------------------------------------------------
-fetchUsers();
-
+// fetchUsers();
+createForm("app", "Log in");
 
 function fetchUsers() {
     fetch('https://dummyjson.com/users?limit=0')
@@ -67,4 +68,8 @@ function userClicked(myId) {
 
 function userViewDone() {
     showAllUsers(globalUserData, 'app', true);
+}
+
+function checkUser() {
+    log.info('Checking');
 }
