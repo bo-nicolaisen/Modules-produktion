@@ -71,46 +71,74 @@ function userViewDone() {
 }
 
 function checkUser(theUserIndput, thepasswordIndput) {
-    
+
+    console.log('checkUser ' + thepasswordIndput);
+
     let indputFromUser = document.getElementById(theUserIndput).value;
+
+    let indputFromPassword = document.getElementById(thepasswordIndput).value;
+
+
+    console.log(indputFromUser);
+
     let korrektUser = "";
-    
-    fetch(`https://dummyjson.com/users/filter?key=username&value=${korrektUser}`)
-  
-    
+
+    fetch(`https://dummyjson.com/users/filter?key=username&value=${indputFromUser}`)
+
+
         .then((response) => {
             // error check på netværk response
             if (!response.ok) {
                 throw new Error("not ok!" + response.status);
             }
-    
-             // konverter response til json data objekt
+
+            // konverter response til json data objekt
             let data = response.json();
             return data;
-    
+
         })
-    
+
         .then((data) => {
             // do stuff - chech om user er ok derefter videre til password check
             //recivedUsers(data.users);
             //fetchUsers();
-            
-            if (indputFromUser === korrektUser) {
+            //console.log(data.users[0]);
 
-                passCheck(data, thepasswordIndput);
+
+
+
+            if (!data.users[0]) {
+
+
+                console.log('bruger ikke ok');
+
+            } else if (data.users[0].password === indputFromPassword) {
+                console.log('wee');
+
+            } else {
+                console.log('not rigtig password');
+            }
+
+
+
+
+            /* if (indputFromUser === data.users[0].username) {
+
+                passCheck(data.users[0].password, indputFromPassword);
                 console.log('bruger ok');
+
             } else {
 
-            const brugernavnInput = document.querySelector('input[name="brugernavn"]');
-            brugernavnInput.classList.add('error');
-            console.log('bruger ikke ok');
-            }
+                const brugernavnInput = document.querySelector('input[name="brugernavn"]');
+                brugernavnInput.classList.add('error');
+                console.log('bruger ikke ok');
+            } */
         })
-    
+
         .catch((error) => {
             console.log(error.message);
         }
-    );
+        );
 }
 
 
@@ -121,31 +149,31 @@ function checkUser(theUserIndput, thepasswordIndput) {
 
 function passCheck(password) {
     fetch(`https://dummyjson.com/users?filter?key=password&value=${password}`)
-    
+
         .then((response) => {
             // error check på netværk response
             if (!response.ok) {
                 throw new Error("not ok!" + response.status);
             }
-    
-             // konverter response til json data objekt
+
+            // konverter response til json data objekt
             let data = response.json();
             return data;
-    
+
         })
-    
+
         .then((data) => {
             // do stuff - log in ok, vis alle brugere
             //recivedUsers(data.users);
             //fetchUsers();
-            
+
             console.log('password ok');
         })
-    
+
         .catch((error) => {
             console.log(error.message);
         }
-    );
+        );
 }
 
 
@@ -160,4 +188,8 @@ function passCheck(password) {
 
 // "username": "atuny0",
 // "password": "9uQFF1Lh",
+
+
+
+
 
